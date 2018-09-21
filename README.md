@@ -36,7 +36,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-- I was codind with a view set on iphone 4s wi=hile building on iphone 6s
+- I was codind with a view set on iphone 4s while building on iphone 6s
 
 
 ## License
