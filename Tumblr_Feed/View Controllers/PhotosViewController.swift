@@ -47,6 +47,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         theTableview.rowHeight = 300
         theTableview.estimatedRowHeight = 350
 
+
         // Network request snippet
         let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -70,22 +71,28 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         task.resume()
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        theTableview.deselectRow(at: indexPath, animated: true)
+        
+    }
     
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
-    /*
-    // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let vc = segue.destination as! PhotoDetailsViewController
+        let cell = sender as! UITableViewCell
+        let indexPath = theTableview.indexPath(for: cell)!
+        let post = posts[indexPath.section]
+        let photos = post["photos"] as! [[String: Any]]
+        let photo = photos[0]
+        let originaliSize = photo["original_size"] as! [String: Any]
+        let urlString = originaliSize["url"] as! String
+        vc.imageURL = URL(string: urlString)
     }
-    */
 
 }
